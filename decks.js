@@ -33,6 +33,7 @@ routeMatcher.post('/api/decks', function (request) {
 			if (reply.status === 'ok') {
 				var results = reply.results;
 				response.statusCode(200);
+				response.end();
 			} else {
 				response.statusCode(500);
 				response.end('An error occurred while saving the deck: ' + reply.message);
