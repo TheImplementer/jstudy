@@ -21,7 +21,7 @@ define(function (require, exports, module) {
 			if (this.selectedDeck === undefined) {
 				var allCards = this.cards.split('\n');
 				allCards.forEach(function (card) {
-					var frontAndBack = card.split(',');
+					var frontAndBack = card.split('#');
 					availableCards.push({
 						front: frontAndBack[0],
 						back: frontAndBack[1]
