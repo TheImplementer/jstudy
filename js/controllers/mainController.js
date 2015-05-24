@@ -1,9 +1,12 @@
 /* global define */
 define(function (require, exports, module) {
 
+	var availableDecks = require('../decks/module');
+
     module.exports = [function () {
 		
 		var availableCards = [];
+		this.availableDecks = availableDecks;
 		
 		var currentCard = {};
 		var isFront = false;
@@ -11,14 +14,23 @@ define(function (require, exports, module) {
 		this.loaded = false;
 		
 		this.loadCards = function () {
-			var allCards = this.cards.split('\n');
-			allCards.forEach(function (card) {
-				var frontAndBack = card.split(',');
-				availableCards.push({
-					front: frontAndBack[0],
-					back: frontAndBack[1]
-				})
-			});
+			if (this.selectedDeck === undefined && this.cards === undefined) {
+				return;
+			}
+		
+			if (this.selectedDeck === undefined) {
+				var allCards = this.cards.split('\n');
+				allCards.forEach(function (card) {
+					var frontAndBack = card.split(',');
+					availableCards.push({
+						front: frontAndBack[0],
+						back: frontAndBack[1]
+					})
+				});
+			} else {
+				availableCards = availableDecks[this.selectedDeck].items;
+			}
+			
 			this.cards = '';
 			this.loaded = true;
 		}

@@ -32,6 +32,14 @@
 						<textarea class="form-control" ng-model="ctrl.cards" name="cards" placeholder="Paste the list of entries to be displayed in the cards."></textarea>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<select name="deck" class="form-control" ng-model="ctrl.selectedDeck">
+							<option value="" disabled selected>Select a deck</option>
+							<option ng-repeat="(id, deck) in ctrl.availableDecks" value="{{id}}">{{deck.displayName}}</option>
+						</select>
+					</div>
+				</div>
 				<div class="row" ng-show="ctrl.loaded">
 					<div class="col-xs-12">
 						Number of cards available: {{ctrl.loadedCards()}}
@@ -47,7 +55,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div id="card" class="center-block">
-						{{ctrl.cardText}}
+							<p>{{ctrl.cardText}}</p>
 						</div>
 					</div>
 				</div>
