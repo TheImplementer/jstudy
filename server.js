@@ -16,16 +16,30 @@
  */
 
 var vertx = require('vertx');
+var http = require('vertx/http');
 var container = require('vertx/container');
 var console = require('vertx/console');
+var eventBus = require('vertx/event_bus');
+
+var mongoAddress = 'vertx.mongopersistor';
+
+load('mongo.js');
+
+var routeMatcher = new http.RouteMatcher();
+
+load('static_routes.js');
+load('decks.js');
+
+routeMatcher.noMatch(function (request) {
+	var response = request.response;
+	response.statusCode(404);
+	response.end('Not found');
+});
 
 var ip = container.env['OPENSHIFT_VERTX_IP'] || '127.0.0.1';
 var port = parseInt(container.env['OPENSHIFT_VERTX_PORT'] || 8080);
 
-vertx.createHttpServer().requestHandler(function(req) {
-  var file = req.path() === '/' ? 'index.html' : req.path();
-  req.response.sendFile('webroot/' + file);
-}).listen(port, ip, function(err) {
+vertx.createHttpServer().requestHandler(routeMatcher).listen(port, ip, function(err) {
     if (!err) {
       console.log('Successfully listening on ' + ip + ':' + port);
     } else {
