@@ -3,7 +3,7 @@ define(function (require, exports, module) {
 
     module.exports = ['decksService', function (decksService) {
 		
-		var availableCards = [];
+		var availableCards;
 		this.availableDecks = [];
 
 		decksService.availableDecks().then(function (decks) {
@@ -16,11 +16,12 @@ define(function (require, exports, module) {
 		this.loaded = false;
 		
 		this.loadCards = function () {
-			if (this.selectedDeck === undefined && this.cards === undefined) {
+			if (this.selectedDeck === '' && this.cards === undefined) {
 				return;
 			}
 		
-			if (this.selectedDeck === undefined) {
+			if (this.selectedDeck === '') {
+				availableCards = [];
 				var allCards = this.cards.split('\n');
 				allCards.forEach(function (card) {
 					var frontAndBack = card.split('#');
