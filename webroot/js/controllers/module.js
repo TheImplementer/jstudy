@@ -2,10 +2,12 @@
 define(function (require, exports, module) {
 
     var angular = require('angular');
-    var mainController = require('./mainController');
+    var reviewsController = require('./reviewsController');
+    var decksController = require('./decksController');
 
     var controllersModule = angular.module('app.controllers', []);
-    controllersModule.controller('mainController', mainController);
+    controllersModule.controller('reviewsController', reviewsController);
+    controllersModule.controller('decksController', decksController);
 
     module.exports = controllersModule;
 });

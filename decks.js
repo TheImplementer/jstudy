@@ -18,3 +18,27 @@ routeMatcher.get('/api/decks', function (request) {
 		}
 	});
 });
+
+routeMatcher.post('/api/decks', function (request) {
+
+	request.bodyHandler(function (body) {
+		var saveMessage = {
+			'action': 'save',
+			'collection': 'decks',
+			'document': JSON.parse(body).deckDefinition
+		};
+
+		eventBus.send(mongoAddress, saveMessage, function (reply) {
+			var response = request.response;
+			if (reply.status === 'ok') {
+				var results = reply.results;
+				response.statusCode(200);
+			} else {
+				response.statusCode(500);
+				response.end('An error occurred while saving the deck: ' + reply.message);
+			}
+		});
+	});
+
+	
+});

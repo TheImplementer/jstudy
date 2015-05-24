@@ -19,56 +19,13 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		  </button>
-		  <a class="navbar-brand" href="#">
+		  <a class="navbar-brand" href="#/">
 		  	Study Japanese
 		  </a>
 		</div>
 	  </div>
 	</nav>
 	
-	<div class="container-fluid" ng-controller="mainController as ctrl">
-		<div class="row">
-			<div class="col-xs-4">
-				<div class="row">
-					<div class="col-xs-12">
-						<textarea class="form-control" ng-model="ctrl.cards" name="cards" placeholder="Paste the list of cards in the format front#back separated by newlines."></textarea>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<select name="deck" class="form-control" ng-model="ctrl.selectedDeck">
-							<option value="" disabled selected>Select a deck</option>
-							<option ng-repeat="(id, deck) in ctrl.availableDecks" value="{{id}}">{{deck.displayName}}</option>
-						</select>
-					</div>
-				</div>
-				<div class="row" ng-show="ctrl.loaded">
-					<div class="col-xs-12">
-						Number of cards available: {{ctrl.loadedCards()}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<button type="button" ng-click="ctrl.loadCards()" class="btn btn-primary">Load</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-8 text-center">
-				<div class="row">
-					<div class="col-xs-12">
-						<div id="card" class="center-block">
-							<p>{{ctrl.cardText}}</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<button type="button" class="btn btn-primary" ng-click="ctrl.flipCard()" ng-show="ctrl.isFront()">Flip</button>
-						<button type="button" class="btn btn-primary" ng-click="ctrl.nextCard()" ng-hide="ctrl.isFront()">Next</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div ng-view></div>
 </body>
 </html>

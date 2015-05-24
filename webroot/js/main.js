@@ -2,11 +2,15 @@
 requirejs.config({
 	baseUrl: 'js',
     paths: {
-        'angular': 'vendor/angular'
+        'angular': 'vendor/angular.min',
+        'angular-route': 'vendor/angular-route.min'
     },
     shim: {
     	'angular': {
     		exports: 'angular'
+    	},
+    	'angular-route': {
+    		deps: ['angular']
     	}
     }
 });

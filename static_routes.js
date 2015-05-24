@@ -11,3 +11,4 @@ routeMatcher.get('/js/.*', sendFileHandler);
 routeMatcher.get('/js3rdparty/.*', sendFileHandler);
 routeMatcher.get('/css/.*', sendFileHandler);
 routeMatcher.get('/fonts/.*', sendFileHandler);
+routeMatcher.get('/partials/.*', sendFileHandler);

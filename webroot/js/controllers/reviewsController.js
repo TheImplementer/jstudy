@@ -7,7 +7,6 @@ define(function (require, exports, module) {
 		this.availableDecks = [];
 
 		decksService.availableDecks().then(function (decks) {
-			console.log(decks);
 			this.availableDecks = decks;
 		}.bind(this));
 		
